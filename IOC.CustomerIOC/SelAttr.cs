@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IOC.IBLL
+namespace IOC.CustomerIOC
 {
-    public interface IHeadphone
+    public class SelAttr:Attribute
     {
     }
 }

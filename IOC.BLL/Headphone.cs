@@ -9,6 +9,9 @@ namespace IOC.BLL
 {
     public class Headphone: IHeadphone
     {
-
+        public Headphone(IPhone phone)
+        {
+            
+        }
     }
 }

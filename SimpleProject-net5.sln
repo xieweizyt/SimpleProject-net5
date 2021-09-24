@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IOC.UI", "IOC.UI\IOC.UI.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "simple-net5", "simple-net5\simple-net5.csproj", "{360288FD-1BB2-4554-983D-98362578EFAF}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IOC.CustomerIOC", "IOC.CustomerIOC\IOC.CustomerIOC.csproj", "{C50C2D76-44EC-41F7-A231-FD94906CCEFF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{360288FD-1BB2-4554-983D-98362578EFAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{360288FD-1BB2-4554-983D-98362578EFAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{360288FD-1BB2-4554-983D-98362578EFAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C50C2D76-44EC-41F7-A231-FD94906CCEFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C50C2D76-44EC-41F7-A231-FD94906CCEFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C50C2D76-44EC-41F7-A231-FD94906CCEFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C50C2D76-44EC-41F7-A231-FD94906CCEFF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

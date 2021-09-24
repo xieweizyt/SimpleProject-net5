@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace IOC.IBLL
 {
-    public interface IHeadphone
+    public interface IPhone
     {
+
     }
 }
