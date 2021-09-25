@@ -46,9 +46,59 @@ namespace IOC.CustomerIOC
             {
                 //递归来创建所有参数的实例
                 object paraInsatance = CreateService(item.ParameterType);
+
+                var paraPropertys = paraInsatance.GetType().GetProperties().Where(t => t.IsDefined(typeof(SelPropAttr)))
+                    .ToList();
+                //构造函数参数的属性注入
+                foreach (var paraProperty in paraPropertys)
+                {
+                    object paraPropInsatance = CreateService(paraProperty.PropertyType);
+                    paraProperty.SetValue(paraInsatance, paraPropInsatance);
+                }
+
+                var paraMethods = paraInsatance.GetType().GetMethods().Where(t => t.IsDefined(typeof(SelMethodAttr)))
+                    .ToList();
+                //构造函数参数的方法注入
+                foreach (var paraMethod in paraMethods)
+                {
+                    List<object> methodParaList = new List<object>();
+                    foreach (var menthodPara in paraMethod.GetParameters())
+                    {
+                        object methodParaInsatance = CreateService(menthodPara.ParameterType);
+                        methodParaList.Add(methodParaInsatance);
+                    }
+                    paraMethod.Invoke(paraInsatance, methodParaList.ToArray());
+                }
+
                 paraList.Add(paraInsatance);
             }
-            return Activator.CreateInstance(type, paraList.ToArray());
+
+            var oResultInsatance = Activator.CreateInstance(type, paraList.ToArray());
+
+            //当前类型的属性注入
+            var oResultPropertys = oResultInsatance.GetType().GetProperties().Where(t => t.IsDefined(typeof(SelPropAttr)))
+                .ToList();
+            foreach (var oResultProperty in oResultPropertys)
+            {
+                object paraPropInsatance = CreateService(oResultProperty.PropertyType);
+                oResultProperty.SetValue(oResultInsatance, paraPropInsatance);
+            }
+
+            //当前类的方法注入
+            var oResultMethods = oResultInsatance.GetType().GetMethods().Where(t => t.IsDefined(typeof(SelMethodAttr)))
+                .ToList();
+            foreach (var paraMethod in oResultMethods)
+            {
+                List<object> methodParaList = new List<object>();
+                foreach (var menthodPara in paraMethod.GetParameters())
+                {
+                    object methodParaInsatance = CreateService(menthodPara.ParameterType);
+                    methodParaList.Add(methodParaInsatance);
+                }
+                paraMethod.Invoke(oResultInsatance, methodParaList.ToArray());
+            }
+
+            return oResultInsatance;
         }
     }
 }

@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using IOC.CustomerIOC;
+using IOC.IBLL;
 
 namespace simple_net5.Controllers
 {
@@ -16,12 +18,22 @@ namespace simple_net5.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly IConfiguration _configuration;
 
+        [SelPropAttr]
+        public IPhone Phone { get; set; }
+
         public HomeController(ILogger<HomeController> logger,
             IConfiguration configuration)
         {
             _logger = logger;
             _configuration = configuration;
             //_logger.LogInformation("123");
+        }
+
+        public IPhone phone1;
+        [SelMethodAttr]
+        public void SetValue(IPhone phone)
+        {
+            phone1 = phone;
         }
 
         public IActionResult Index()

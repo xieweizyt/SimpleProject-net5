@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\IOC.CustomerIOC\IOC.CustomerIOC.csproj" />
     <ProjectReference Include="..\IOC.IBLL\IOC.IBLL.csproj" />
   </ItemGroup>
 

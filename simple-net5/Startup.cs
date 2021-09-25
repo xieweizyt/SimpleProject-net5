@@ -8,6 +8,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Autofac;
+using Autofac.Extras.DynamicProxy;
+using IOC.BLL;
+using IOC.CustomerIOC;
+using IOC.IBLL;
+using Microsoft.AspNetCore.Mvc.Controllers;
+using simple_net5.Commom;
 
 namespace simple_net5
 {
@@ -23,7 +30,13 @@ namespace simple_net5
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddControllersAsServices();
+            //var activator = services.FirstOrDefault(t => t.ServiceType == typeof(IControllerActivator));
+            //services.Remove(activator);
+            //services.AddTransient<IControllerActivator, CustomerControllerActivator>();
+            //services.AddTransient<IPhone, Phone>();
+            //services.AddTransient<IHeadphone, Headphone>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,8 +63,29 @@ namespace simple_net5
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=AutoFacController1}/{action=Index}/{id?}");
             });
+        }
+
+        public void ConfigureContainer(ContainerBuilder containerBuilder)
+        {
+            containerBuilder.RegisterType<Phone>().As<IPhone>();
+
+            containerBuilder.RegisterType<Headphone>()
+                .As<IHeadphone>()
+                //支持属性注入
+                .PropertiesAutowired(new CustomPropertySelector())
+                //支持方法注入
+                .OnActivated(p =>
+                {
+                    p.Instance.SetValue(p.Context.Resolve<IPhone>());
+                });
+
+            //增加AOP
+            //containerBuilder.RegisterType<Headphone>()
+            //    .As<IHeadphone>()
+            //    .EnableInterfaceInterceptors();
+            //containerBuilder.RegisterType(typeof(CustomInterceptor));
         }
     }
 }

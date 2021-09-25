@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Autofac.Extensions.DependencyInjection;
 
 namespace simple_net5
 {
@@ -24,7 +25,8 @@ namespace simple_net5
                 }).ConfigureLogging(builder =>
                 {
                     builder.AddLog4Net("Properties/log4net.config");
-                });
+                })
+                .UseServiceProviderFactory(new AutofacServiceProviderFactory());
 
     }
 }

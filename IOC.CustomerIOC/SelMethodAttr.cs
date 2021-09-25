@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IOC.IBLL
+namespace IOC.CustomerIOC
 {
-    public interface IHeadphone
+    [AttributeUsage(AttributeTargets.Method)]
+    public class SelMethodAttr : Attribute
     {
-        void Show();
     }
 }

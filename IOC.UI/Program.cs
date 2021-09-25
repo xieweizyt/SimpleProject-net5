@@ -30,11 +30,10 @@ namespace IOC.UI
 
             #region 自定义IOC容器
             {
-                ICustomerIoc customerIoc = new CustomerIoc();
-                customerIoc.AddTransient<IPhone, Phone>();
-                customerIoc.AddTransient<IHeadphone, Headphone>();
-                IPhone phone = customerIoc.GetService<IPhone>();
-                IHeadphone headphone = customerIoc.GetService<IHeadphone>();
+                //ICustomerIoc customerIoc = new CustomerIoc();
+                //customerIoc.AddTransient<IPhone, Phone>();
+                //customerIoc.AddTransient<IHeadphone, Headphone>();
+                //IHeadphone headphone = customerIoc.GetService<IHeadphone>();
             }
             #endregion
         }
